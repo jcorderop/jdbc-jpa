@@ -11,13 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository
+//@Repository
 public class PersonJdbcDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    class PersonRowMapper implements RowMapper<Person> {
+    static class PersonRowMapper implements RowMapper<Person> {
 
         @Override
         public Person mapRow(final ResultSet rs, final int rowNum) throws SQLException {

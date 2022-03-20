@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Slf4j
-@Component
+//@Component
 public class JdbcCommandLine implements CommandLineRunner {
 
     @Autowired
     private PersonJdbcDao personJdbcDao;
 
     @Override
-    public void run(String... args) throws Exception {
-        personJdbcDao.findAll().stream().forEach(person -> log.info(person.toString()));
+    public void run(String... args) {
+        personJdbcDao.findAll().forEach(person -> log.info(person.toString()));
 
         int id = 10001;
         log.info("Find by Id: {} - {}", id, personJdbcDao.findById(id).toString());
@@ -29,6 +29,6 @@ public class JdbcCommandLine implements CommandLineRunner {
 
         log.info("Update new Person: {}", personJdbcDao.update(new Person(id, "Jose", "Casas Grandes", LocalDate.now())));
 
-        personJdbcDao.findAll().stream().forEach(person -> log.info(person.toString()));
+        personJdbcDao.findAll().forEach(person -> log.info(person.toString()));
     }
 }

@@ -1,3 +1,4 @@
+/*
 create table person
 (
     id integer not null,
@@ -7,7 +8,9 @@ create table person
     primary key (id)
 );
 
+
 INSERT INTO PERSON VALUES(10001, 'JORGE','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10002, 'ALICIA','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10003, 'VIDAL','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10004, 'DANA','WINTERTHUR', SYSDATE());
+*/
