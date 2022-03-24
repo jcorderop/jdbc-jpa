@@ -5,21 +5,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
+@Transactional
 @Repository
 public class CourseRepository {
 
     @Autowired
     private EntityManager entityManager;
 
-    public Course findById(Long id) {
+    public Course findById(final Long id) {
         return entityManager.find(Course.class, id);
     }
 
-    public Course save(Course course) {
-        return null;
+    public Course save(final Course course) {
+        return entityManager.merge(course);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
+        final Course course = findById(id);
+        entityManager.remove(course);
     }
 }
