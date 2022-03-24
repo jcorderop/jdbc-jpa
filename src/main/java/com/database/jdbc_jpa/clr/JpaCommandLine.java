@@ -1,9 +1,7 @@
-package com.database.clr;
+package com.database.jdbc_jpa.clr;
 
-import com.database.entity.Person;
-import com.database.entity.PersonEntity;
-import com.database.jdbc.PersonJdbcDao;
-import com.database.jpa.PersonJpaRepository;
+import com.database.jdbc_jpa.entity.PersonEntity;
+import com.database.jdbc_jpa.jpa.PersonJpaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

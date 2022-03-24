@@ -1,7 +1,7 @@
-package com.database.jpa;
+package com.database.jdbc_jpa.jpa;
 
 
-import com.database.entity.PersonEntity;
+import com.database.jdbc_jpa.entity.PersonEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;

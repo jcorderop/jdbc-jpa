@@ -1,7 +1,7 @@
-package com.database.clr;
+package com.database.jdbc_jpa.clr;
 
-import com.database.entity.Person;
-import com.database.jdbc.PersonJdbcDao;
+import com.database.jdbc_jpa.entity.Person;
+import com.database.jdbc_jpa.jdbc.PersonJdbcDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Slf4j
-//@Component
+@Component
 public class JdbcCommandLine implements CommandLineRunner {
 
     @Autowired
