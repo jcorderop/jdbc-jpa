@@ -2,6 +2,7 @@ package com.database.courses.repository;
 
 import com.database.courses.entity.Course;
 import com.database.courses.entity.Review;
+import com.database.courses.entity.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ class CourseRepositoryTest {
         //then
         assertEquals("German", course.getName());
         assertEquals(2, course.getReviews().size());
+        assertEquals(2, course.getStudents().size());
     }
 
     @Test
@@ -142,6 +144,54 @@ class CourseRepositoryTest {
         assertEquals(0, saveCourse.getReviews().size());
     }
 
+
+    @Test
+    @Transactional
+    @DirtiesContext
+    void save_add_students() {
+        //given
+        long id = 10000L;
+        String name = "German";
+        Course course = repository.findById(id);
+        course.setName(name);
+        Student newStudent = entityManager.find(Student.class, 20002L);
+        course.addStudent(newStudent);
+
+        //when
+        Course saveCourse = repository.save(course);
+
+        //then
+        assertEquals(id, saveCourse.getId());
+        assertEquals(name, saveCourse.getName());
+        assertEquals(3, saveCourse.getStudents().size());
+    }
+
+    @Test
+    @Transactional
+    @DirtiesContext
+    void save_remove_students() {
+        //given
+        long id = 10000L;
+        String name = "German";
+        Course course = repository.findById(id);
+        course.setName(name);
+        log.info("Reviews: {}", course.getReviews().size());
+        List<Student> studentList = course.getStudents().stream().toList();
+        IntStream.range(0, course.getStudents().size()).forEach(value -> {
+            var student = studentList.get(value);
+            log.info("Removing: {}", student.toString());
+            course.removeStudent(student);
+        });
+
+        //when
+        Course saveCourse = repository.save(course);
+
+        //then
+        assertEquals(id, saveCourse.getId());
+        assertEquals(name, saveCourse.getName());
+        assertEquals(0, saveCourse.getStudents().size());
+    }
+
     @Test
     @DirtiesContext
     void deleteById() {
@@ -151,24 +201,32 @@ class CourseRepositoryTest {
         //when
         repository.deleteById(id);
         Course courseSearch = repository.findById(id);
-        List<Review> courseById = entityManager.createQuery("select r from Review r where r.course.id = :course_id").setParameter("course_id", id).getResultList();
+        List<Review> courseById = entityManager.createQuery("select r from Review r where r.course.id = :course_id")
+                .setParameter("course_id", id)
+                .getResultList();
 
         //then
         assertNull(courseSearch);
         assertEquals(0, courseById.size());
+        assertEquals(20000L, entityManager.find(Student.class, 20000L).getId());
+        assertEquals(20001L, entityManager.find(Student.class, 20001L).getId());
+        assertEquals(20002L, entityManager.find(Student.class, 20002L).getId());
     }
 
     @Test
+    @Transactional
     @DirtiesContext
     void getReviews_from_entity_manager() {
         //given
         long id = 10000L;
+        String name = "German";
 
         //when
-        List<Review> courseById = entityManager.createQuery("select r from Review r where r.course.id = :course_id").setParameter("course_id", id).getResultList();
+        List<Review> coursesById = entityManager.createQuery("select r from Review r where r.course.id = :course_id").setParameter("course_id", id).getResultList();
 
         //then
-        assertNotNull(courseById);
-        assertEquals(2, courseById.size());
+        assertNotNull(coursesById);
+        assertEquals(2, coursesById.size());
+        coursesById.stream().forEach(review -> assertEquals(name, review.getCourse().getName()));
     }
 }

@@ -31,3 +31,9 @@ INSERT INTO review(id, rating, description, version, create_date, update_date, c
 INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40001, 3, 'can be better', 1, SYSDATE(), SYSDATE(), 10000);
 INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40002, 5, 'awesome', 1, SYSDATE(), SYSDATE(), 10003);
 INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40003, 1, '', 1, SYSDATE(), SYSDATE(), 10001);
+
+INSERT INTO student_course(student_id, course_id) VALUES(20000, 10000);
+INSERT INTO student_course(student_id, course_id) VALUES(20000, 10001);
+INSERT INTO student_course(student_id, course_id) VALUES(20001, 10000);
+INSERT INTO student_course(student_id, course_id) VALUES(20002, 10002);
+INSERT INTO student_course(student_id, course_id) VALUES(20002, 10002);

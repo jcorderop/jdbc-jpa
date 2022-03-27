@@ -2,12 +2,16 @@ package com.database.courses.entity;
 
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Slf4j
 @EqualsAndHashCode
 @ToString
 @Setter
@@ -38,6 +42,37 @@ public class Student {
             fetch = FetchType.LAZY)
     @NonNull
     private Passport passport;
+
+    @Setter(AccessLevel.NONE)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY,
+            mappedBy = "students",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                }
+            )
+    List<Course> courses = new ArrayList<>();
+
+    public void addCourse(Course course) {
+        if (courses.contains(course)) {
+            log.info("Already added...");
+        } else {
+            courses.add(course);
+            course.addStudent(this);
+        }
+    }
+
+    public void removeCourse(Course course) {
+        if (courses.contains(course)) {
+            courses.remove(course);
+            course.removeStudent(this);
+        } else {
+            log.info("Already removed...");
+        }
+    }
 
     //optimistic updates
     @EqualsAndHashCode.Exclude

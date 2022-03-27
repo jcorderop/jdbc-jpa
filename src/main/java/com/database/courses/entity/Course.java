@@ -1,6 +1,7 @@
 package com.database.courses.entity;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @EqualsAndHashCode
 @ToString
 @Setter
@@ -45,6 +47,39 @@ public class Course {
 
     public void removeReview(Review review) {
         reviews.remove(review);
+    }
+
+    @Setter(AccessLevel.NONE)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.REMOVE,
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+        )
+    @JoinTable(name = "student_course",
+            joinColumns = @JoinColumn(name = "course_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    List<Student> students = new ArrayList<>();
+
+    public void addStudent(Student student) {
+        if (students.contains(student)) {
+            log.info("Already added...");
+        } else {
+            students.add(student);
+            student.addCourse(this);
+        }
+    }
+
+    public void removeStudent(Student student) {
+        if (students.contains(student)) {
+            students.remove(student);
+            student.removeCourse(this);
+        } else {
+            log.info("Already removed...");
+        }
     }
 
     //optimistic updates

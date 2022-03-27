@@ -27,6 +27,12 @@ public class CourseRepository {
 
     public void deleteById(final Long id) {
         final Course course = findById(id);
+        course.getStudents()
+                .stream()
+                .toList()
+                .stream()
+                .forEach(student -> course.removeStudent(student));
+        entityManager.merge(course);
         entityManager.remove(course);
     }
 
