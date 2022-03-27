@@ -8,7 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+@EqualsAndHashCode
+@ToString
+@Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,15 +34,23 @@ public class Review {
     @NonNull
     private String description;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Course course;
+
     //optimistic updates
+    @EqualsAndHashCode.Exclude
     @Version
     private int version;
 
     //update dates
+    @EqualsAndHashCode.Exclude
     @Column(name = "create_date")
     @CreationTimestamp
     private LocalDateTime createDate;
 
+    @EqualsAndHashCode.Exclude
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;

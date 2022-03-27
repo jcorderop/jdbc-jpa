@@ -27,7 +27,7 @@ INSERT INTO student(id, name, version, create_date, update_date, passport_id) VA
 INSERT INTO student(id, name, version, create_date, update_date, passport_id) VALUES(20001, 'Vidal', 1, SYSDATE(), SYSDATE(), 30001);
 INSERT INTO student(id, name, version, create_date, update_date, passport_id) VALUES(20002, 'Alicia', 1, SYSDATE(), SYSDATE(), 30002);
 
-INSERT INTO review(id, rating, description, version, create_date, update_date) VALUES(40000, 4, 'not bad', 1, SYSDATE(), SYSDATE());
-INSERT INTO review(id, rating, description, version, create_date, update_date) VALUES(40001, 3, 'can be better', 1, SYSDATE(), SYSDATE());
-INSERT INTO review(id, rating, description, version, create_date, update_date) VALUES(40002, 5, 'awesome', 1, SYSDATE(), SYSDATE());
-INSERT INTO review(id, rating, description, version, create_date, update_date) VALUES(40003, 1, '', 1, SYSDATE(), SYSDATE());
+INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40000, 4, 'not bad', 1, SYSDATE(), SYSDATE(), 10000);
+INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40001, 3, 'can be better', 1, SYSDATE(), SYSDATE(), 10000);
+INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40002, 5, 'awesome', 1, SYSDATE(), SYSDATE(), 10003);
+INSERT INTO review(id, rating, description, version, create_date, update_date, course_id) VALUES(40003, 1, '', 1, SYSDATE(), SYSDATE(), 10001);

@@ -9,7 +9,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Data
+@EqualsAndHashCode
+@ToString
+@Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,18 +35,23 @@ public class Passport {
     @NonNull
     private LocalDate expiryDate;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     private Student student;
 
     //optimistic updates
+    @EqualsAndHashCode.Exclude
     @Version
     private int version;
 
     //update dates
+    @EqualsAndHashCode.Exclude
     @Column(name = "create_date")
     @CreationTimestamp
     private LocalDateTime createDate;
 
+    @EqualsAndHashCode.Exclude
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;

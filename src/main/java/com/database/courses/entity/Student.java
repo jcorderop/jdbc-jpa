@@ -8,7 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+@EqualsAndHashCode
+@ToString
+@Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +31,8 @@ public class Student {
     private String name;
 
     //https://www.baeldung.com/hibernate-initialize-proxy-exception
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(orphanRemoval = true,
             optional = false,
             fetch = FetchType.LAZY)
@@ -36,14 +40,17 @@ public class Student {
     private Passport passport;
 
     //optimistic updates
+    @EqualsAndHashCode.Exclude
     @Version
     private int version;
 
     //update dates
+    @EqualsAndHashCode.Exclude
     @Column(name = "create_date")
     @CreationTimestamp
     private LocalDateTime createDate;
 
+    @EqualsAndHashCode.Exclude
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;
