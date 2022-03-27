@@ -1,5 +1,6 @@
 package com.database.courses.repository;
 
+import com.database.courses.entity.Course;
 import com.database.courses.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,12 @@ public class StudentRepository {
 
     public void deleteById(final Long id) {
         final Student student = findById(id);
+        student.getCourses()
+                .stream()
+                .toList()
+                .stream()
+                .forEach(course -> student.removeCourse(course));
+        entityManager.merge(student);
         entityManager.remove(student);
     }
 }
