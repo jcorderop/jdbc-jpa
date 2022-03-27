@@ -1,5 +1,6 @@
 package com.database.courses.entity;
 
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,12 +13,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity(name = "Course")
-@Table(name = "course")
+@Entity(name = "Student")
+@Table(name = "student")
 @NamedQueries(value = {
-        @NamedQuery(name = "all_courses", query = "select c from Course c"),
+        @NamedQuery(name = "all_students", query = "select c from Student c"),
 })
-public class Course {
+public class Student {
 
     @Id
     @GeneratedValue

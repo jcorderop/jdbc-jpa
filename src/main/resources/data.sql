@@ -14,7 +14,7 @@ INSERT INTO PERSON VALUES(10002, 'ALICIA','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10003, 'VIDAL','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10004, 'DANA','WINTERTHUR', SYSDATE());
 */
-INSERT INTO course VALUES(10000, 'German');
-INSERT INTO course VALUES(10001, 'English');
-INSERT INTO course VALUES(10002, 'Spanish');
-INSERT INTO course VALUES(10003, 'French');
+INSERT INTO course(id, name, version, create_date, update_date) VALUES(10000, 'German', 1, SYSDATE(), SYSDATE());
+INSERT INTO course(id, name, version, create_date, update_date) VALUES(10001, 'English', 1, SYSDATE(), SYSDATE());
+INSERT INTO course(id, name, version, create_date, update_date) VALUES(10002, 'Spanish', 1, SYSDATE(), SYSDATE());
+INSERT INTO course(id, name, version, create_date, update_date) VALUES(10003, 'French', 1, SYSDATE(), SYSDATE());
