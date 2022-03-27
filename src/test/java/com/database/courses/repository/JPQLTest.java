@@ -92,4 +92,5 @@ public class JPQLTest {
         assertEquals(10000L, result.get(0).getId());
         assertEquals("German", result.get(0).getName());
     }
+
 }

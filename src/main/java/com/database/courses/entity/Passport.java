@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -30,7 +31,10 @@ public class Passport {
 
     @Column(name = "expiry_date", nullable = false)
     @NonNull
-    private LocalDateTime expiryDate;
+    private LocalDate expiryDate;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+    private Student student;
 
     //optimistic updates
     @Version

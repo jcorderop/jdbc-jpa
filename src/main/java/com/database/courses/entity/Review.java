@@ -28,7 +28,7 @@ public class Review {
     @NonNull
     private int rating;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     @NonNull
     private String description;
 
