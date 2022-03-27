@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CourseRepositoryTest {
 
     @Autowired
-    CourseRepository courseRepository;
+    CourseRepository repository;
 
     @Test
     @DirtiesContext
@@ -24,7 +24,7 @@ class CourseRepositoryTest {
         long id = 10000L;
 
         //when
-        Course course = courseRepository.findById(id);
+        Course course = repository.findById(id);
 
         //then
         assertEquals("German", course.getName());
@@ -38,7 +38,7 @@ class CourseRepositoryTest {
         Course newCourse = new Course(name);
 
         //when
-        Course course = courseRepository.save(newCourse);
+        Course course = repository.save(newCourse);
 
         //then
         assertNotNull(course.getId());
@@ -55,7 +55,7 @@ class CourseRepositoryTest {
         //when
 
         //then
-        assertThrows(DataIntegrityViolationException.class, () -> courseRepository.save(newCourse));
+        assertThrows(DataIntegrityViolationException.class, () -> repository.save(newCourse));
     }
 
     @Test
@@ -64,7 +64,7 @@ class CourseRepositoryTest {
         //given
         long id = 10000L;
         String name = "German B2";
-        Course course = courseRepository.findById(id);
+        Course course = repository.findById(id);
         course.setName(name);
         //custom fields
         int version = course.getVersion() + 1;
@@ -72,7 +72,7 @@ class CourseRepositoryTest {
         LocalDateTime updateDate = course.getUpdateDate();
 
         //when
-        Course saveCourse = courseRepository.save(course);
+        Course saveCourse = repository.save(course);
 
         //then
         assertEquals(id, saveCourse.getId());
@@ -90,8 +90,8 @@ class CourseRepositoryTest {
         long id = 10000L;
 
         //when
-        courseRepository.deleteById(id);
-        Course courseSearch = courseRepository.findById(id);
+        repository.deleteById(id);
+        Course courseSearch = repository.findById(id);
 
         //then
         assertNull(courseSearch);

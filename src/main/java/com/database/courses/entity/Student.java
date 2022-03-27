@@ -28,6 +28,13 @@ public class Student {
     @NonNull
     private String name;
 
+    //https://www.baeldung.com/hibernate-initialize-proxy-exception
+    @OneToOne(orphanRemoval = true,
+            optional = false,
+            fetch = FetchType.LAZY)
+    @NonNull
+    private Passport passport;
+
     //optimistic updates
     @Version
     private int version;
