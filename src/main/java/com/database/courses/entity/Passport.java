@@ -1,5 +1,6 @@
 package com.database.courses.entity;
 
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,20 +13,24 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity(name = "Course")
-@Table(name = "course")
+@Entity(name = "Passport")
+@Table(name = "passport")
 @NamedQueries(value = {
-        @NamedQuery(name = "all_courses", query = "select c from Course c"),
+        @NamedQuery(name = "all_passport", query = "select c from Passport c"),
 })
-public class Course {
+public class Passport {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "number", nullable = false, unique = true)
     @NonNull
-    private String name;
+    private String number;
+
+    @Column(name = "expiry_date", nullable = false)
+    @NonNull
+    private LocalDateTime expiryDate;
 
     //optimistic updates
     @Version
@@ -40,3 +45,4 @@ public class Course {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 }
+
