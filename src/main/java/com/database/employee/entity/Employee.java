@@ -1,16 +1,9 @@
 package com.database.employee.entity;
 
-import com.database.courses.entity.Review;
-import com.database.courses.entity.Student;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @EqualsAndHashCode
@@ -22,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Entity(name = "Employee")
 @Table(name = "employee")
-@MappedSuperclass
+//@MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED) // best design
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
