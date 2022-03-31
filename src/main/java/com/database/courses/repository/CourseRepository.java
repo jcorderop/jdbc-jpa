@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -74,5 +72,10 @@ public class CourseRepository {
         return course;
     }
 
+    public List<Course> getCourseWithoutStudents () {
+        return entityManager
+                .createQuery("Select c From Course c where c.students is empty", Course.class)
+                .getResultList();
+    }
 
 }

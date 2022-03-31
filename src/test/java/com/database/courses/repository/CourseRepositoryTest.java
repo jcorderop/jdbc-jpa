@@ -229,4 +229,15 @@ class CourseRepositoryTest {
         assertEquals(2, coursesById.size());
         coursesById.stream().forEach(review -> assertEquals(name, review.getCourse().getName()));
     }
+
+    @Test
+    void getCourseWithoutStudents() {
+        //given
+
+        //when
+        List<Course> courseWithoutStudents = repository.getCourseWithoutStudents();
+        //then
+        assertEquals(1, courseWithoutStudents.size());
+        assertEquals(10003L, courseWithoutStudents.get(0).getId());
+    }
 }
