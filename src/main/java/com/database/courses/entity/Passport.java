@@ -37,7 +37,14 @@ public class Passport {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+    @OneToOne(fetch = FetchType.LAZY,
+            mappedBy = "passport",
+            cascade = {
+                //CascadeType.PERSIST,
+                //CascadeType.REMOVE,
+                CascadeType.MERGE
+            }
+    )
     private Student student;
 
     //optimistic updates

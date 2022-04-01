@@ -54,7 +54,7 @@ public class Course {
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
-                    CascadeType.REMOVE,
+                    //CascadeType.REMOVE,
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             }

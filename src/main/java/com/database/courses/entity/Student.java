@@ -39,6 +39,11 @@ public class Student {
     @EqualsAndHashCode.Exclude
     @OneToOne(orphanRemoval = true,
             optional = false,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.REMOVE,
+                    CascadeType.MERGE
+            },
             fetch = FetchType.LAZY)
     @NonNull
     private Passport passport;
@@ -51,7 +56,7 @@ public class Student {
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE,
-                    CascadeType.REMOVE
+                    //CascadeType.REMOVE
                 }
             )
     List<Course> courses = new ArrayList<>();
