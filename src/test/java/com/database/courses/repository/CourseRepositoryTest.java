@@ -2,6 +2,7 @@ package com.database.courses.repository;
 
 import com.database.courses.entity.Course;
 import com.database.courses.entity.Review;
+import com.database.courses.entity.ReviewRating;
 import com.database.courses.entity.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -106,8 +107,8 @@ class CourseRepositoryTest {
         String name = "German";
         Course course = repository.findById(id);
         course.setName(name);
-        course.addReview(new Review(3, "Something else to review..."));
-        course.addReview(new Review(4, "Once again reviewing..."));
+        course.addReview(new Review(ReviewRating.THREE, "Something else to review..."));
+        course.addReview(new Review(ReviewRating.FOUR, "Once again reviewing..."));
 
         //when
         Course saveCourse = repository.save(course);
