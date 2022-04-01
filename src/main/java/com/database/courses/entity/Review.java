@@ -29,7 +29,8 @@ public class Review {
 
     @Column(name = "rating", nullable = false, updatable = false)
     @NonNull
-    private int rating;
+    @Enumerated(EnumType.STRING)
+    private ReviewRating rating;
 
     @Column(name = "description")
     @NonNull

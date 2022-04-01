@@ -24,6 +24,7 @@ import java.util.List;
 @Table(name = "course")
 @NamedQueries(value = {
         @NamedQuery(name = "all_courses", query = "select c from Course c"),
+        @NamedQuery(name = "all_courses_join_fetch", query = "select c from Course c join fetch c.students"),
 })
 @Cacheable
 @SQLDelete(sql = "UPDATE Course SET deleted = true WHERE id = ? and -1 != ?")
