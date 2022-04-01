@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 @NamedQueries(value = {
         @NamedQuery(name = "all_passport", query = "select c from Passport c"),
 })
+@Cacheable
 public class Passport {
 
     @Id

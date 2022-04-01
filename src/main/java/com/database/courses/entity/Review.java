@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @NamedQueries(value = {
         @NamedQuery(name = "all_review", query = "select c from Review c"),
 })
+@Cacheable
 public class Review {
 
     @Id
