@@ -97,4 +97,5 @@ public class Course {
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
 }

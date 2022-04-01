@@ -198,4 +198,5 @@ public class JPQLTest {
         assertEquals(12, courses.size());
         courses.forEach(System.out::println);
     }
+
 }
