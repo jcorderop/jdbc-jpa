@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class NativeQueryTest {
         String name = "German";
 
         //when
-        final List<Course> result = entityManager.createNativeQuery("select c.id, c.name, c.version, c.create_date, c.update_date from Course c where c.name = ?", Course.class)
+        final List<Course> result = entityManager.createNativeQuery("select c.id, c.name, c.version, c.create_date, c.update_date, c.deleted from Course c where c.name = ?", Course.class)
                 .setParameter(1, name)
                 .getResultList();
 
@@ -76,7 +75,7 @@ public class NativeQueryTest {
         Long id = 10000L;
 
         //when
-        final List<Course> result = entityManager.createNativeQuery("select id, name, version, create_date, update_date from Course c where c.id = ? ", Course.class)
+        final List<Course> result = entityManager.createNativeQuery("select id, name, version, create_date, update_date, deleted from Course c where c.id = ? ", Course.class)
                 .setParameter(1, id)
                 .getResultList();
 
