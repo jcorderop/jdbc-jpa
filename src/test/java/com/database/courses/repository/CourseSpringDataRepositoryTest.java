@@ -203,20 +203,42 @@ class CourseSpringDataRepositoryTest {
         assertEquals(3, studentRepository.findAll().size());
         courseRepository.deleteById(id);
         Optional<Course> courseSearch = courseRepository.findById(id);
+        //Optional<Course> courseSearchDeleted = courseRepository.getCourseDeleted(id);
         List<Review> courseById = courseRepository.getReviewsByCourse(id);
 
         //then
         assertFalse(courseSearch.isPresent());
+        //assertTrue(courseSearchDeleted.isPresent());
+        //assertTrue(courseSearchDeleted.get().isDeleted());
         assertEquals(0, courseById.size());
         assertEquals(3, studentRepository.findAll().size());
         assertEquals(20000L, studentRepository.findById(20000L).get().getId());
         assertEquals(20001L, studentRepository.findById(20001L).get().getId());
         assertEquals(20002L, studentRepository.findById(20002L).get().getId());
 
+        Optional<Course> byId = courseRepository.findById(10000L);
         assertFalse(courseRepository.findById(10000L).isPresent());
         assertEquals(10001L, courseRepository.findById(10001L).get().getId());
         assertEquals(10002L, courseRepository.findById(10002L).get().getId());
         assertEquals(10003L, courseRepository.findById(10003L).get().getId());
+    }
+
+    @Test
+    @Transactional
+    @DirtiesContext
+    void deleteById_soft_delete() {
+        //given
+        long id = 10000L;
+
+        //when
+        courseRepository.deleteById(id);
+        Optional<Course> courseSearch = courseRepository.findById(id);
+        Optional<Course> courseSearchDeleted = courseRepository.getCourseDeleted(id);
+
+        //then
+        assertFalse(courseSearch.isPresent());
+        assertTrue(courseSearchDeleted.isPresent());
+        assertTrue(courseSearchDeleted.get().isDeleted());
     }
 
     @Test

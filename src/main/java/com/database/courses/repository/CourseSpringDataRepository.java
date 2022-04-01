@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Tuple;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RepositoryRestResource(path = "courses")
@@ -25,4 +26,7 @@ public interface CourseSpringDataRepository extends JpaRepository<Course, Long> 
 
     @Query(value = "select student_id, course_id from student_course", nativeQuery = true)
     List<Tuple> getStudentsCourses();
+
+    @Query(value = "Select * From Course c where c.id=:courseId", nativeQuery = true)
+    Optional<Course> getCourseDeleted(long courseId);
 }

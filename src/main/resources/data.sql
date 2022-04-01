@@ -14,10 +14,10 @@ INSERT INTO PERSON VALUES(10002, 'ALICIA','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10003, 'VIDAL','WINTERTHUR', SYSDATE());
 INSERT INTO PERSON VALUES(10004, 'DANA','WINTERTHUR', SYSDATE());
 */
-INSERT INTO course(id, name, version, create_date, update_date) VALUES(10000, 'German', 1, SYSDATE(), SYSDATE());
-INSERT INTO course(id, name, version, create_date, update_date) VALUES(10001, 'English', 1, SYSDATE(), SYSDATE());
-INSERT INTO course(id, name, version, create_date, update_date) VALUES(10002, 'Spanish', 1, SYSDATE(), SYSDATE());
-INSERT INTO course(id, name, version, create_date, update_date) VALUES(10003, 'French', 1, SYSDATE(), SYSDATE());
+INSERT INTO course(id, name, version, create_date, update_date, deleted) VALUES(10000, 'German', 1, SYSDATE(), SYSDATE(), false);
+INSERT INTO course(id, name, version, create_date, update_date, deleted) VALUES(10001, 'English', 1, SYSDATE(), SYSDATE(), false);
+INSERT INTO course(id, name, version, create_date, update_date, deleted) VALUES(10002, 'Spanish', 1, SYSDATE(), SYSDATE(), false);
+INSERT INTO course(id, name, version, create_date, update_date, deleted) VALUES(10003, 'French', 1, SYSDATE(), SYSDATE(), false);
 
 INSERT INTO passport(id, number, expiry_date, version, create_date, update_date) VALUES(30000, 'J1002', '2028-01-02', 1, SYSDATE(), SYSDATE());
 INSERT INTO passport(id, number, expiry_date, version, create_date, update_date) VALUES(30001, 'V1068', '2025-06-05', 1, SYSDATE(), SYSDATE());

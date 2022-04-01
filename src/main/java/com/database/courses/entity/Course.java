@@ -3,7 +3,9 @@ package com.database.courses.entity;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,6 +26,8 @@ import java.util.List;
         @NamedQuery(name = "all_courses", query = "select c from Course c"),
 })
 @Cacheable
+@SQLDelete(sql = "UPDATE Course SET deleted = true WHERE id = ? and -1 != ?")
+@Where(clause = "deleted = false")
 public class Course {
 
     @Id
@@ -98,5 +102,13 @@ public class Course {
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+    private boolean deleted = false;
+
+    @PreRemove
+    private void preRemoved() {
+        log.info("row deleted {}", this);
+        this.deleted = true;
+    }
 
 }

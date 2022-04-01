@@ -95,4 +95,9 @@ public class Student {
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Embedded
+    private Address address;
 }

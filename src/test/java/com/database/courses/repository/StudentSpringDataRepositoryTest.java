@@ -1,5 +1,6 @@
 package com.database.courses.repository;
 
+import com.database.courses.entity.Address;
 import com.database.courses.entity.Course;
 import com.database.courses.entity.Passport;
 import com.database.courses.entity.Student;
@@ -78,6 +79,29 @@ class StudentSpringDataRepositoryTest {
     @Test
     @DirtiesContext
     void save_update_custom_fields() {
+        //given
+        long id = 20000L;
+        String name = "Jorge Cordero";
+        Student student = studentRepository.findById(id).get();
+        student.setName(name);
+        student.setAddress(new Address("Winterthur", "Kamillestrasse", "26", 8045));
+
+        //when
+        Student saveCourse = studentRepository.save(student);
+
+        //then
+        assertEquals(id, saveCourse.getId());
+        assertEquals(name, saveCourse.getName());
+        //custom fields
+        assertEquals("Winterthur", saveCourse.getAddress().getCity());
+        assertEquals("Kamillestrasse", saveCourse.getAddress().getStreet());
+        assertEquals("26", saveCourse.getAddress().getNumber());
+        assertEquals(8045, saveCourse.getAddress().getPostCode());
+    }
+
+    @Test
+    @DirtiesContext
+    void save_address() {
         //given
         long id = 20000L;
         String name = "Jorge Cordero";
