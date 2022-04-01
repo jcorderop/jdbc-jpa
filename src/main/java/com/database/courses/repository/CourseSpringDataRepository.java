@@ -4,10 +4,14 @@ import com.database.courses.entity.Course;
 import com.database.courses.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Tuple;
 import java.util.List;
 
+@Repository
+@RepositoryRestResource(path = "courses")
 public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
 
     @Query("select r from Review r where r.course.id = :courseId")
