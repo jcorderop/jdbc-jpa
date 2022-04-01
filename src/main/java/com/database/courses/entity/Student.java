@@ -24,6 +24,7 @@ import java.util.List;
 @NamedQueries(value = {
         @NamedQuery(name = "all_students", query = "select c from Student c"),
 })
+@Cacheable
 public class Student {
 
     @Id
