@@ -1,7 +1,9 @@
 package com.database;
 
+import com.database.courses.repository.CourseRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
@@ -12,7 +14,9 @@ import org.springframework.context.annotation.FilterType;
 public class DataBaseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DataBaseApplication.class, args);
+		ConfigurableApplicationContext appCx = SpringApplication.run(DataBaseApplication.class, args);
+
+		CourseRepository courseRepository =  appCx.getBean(CourseRepository.class);
 	}
 
 }
